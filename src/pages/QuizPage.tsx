@@ -4,10 +4,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card"; // Removido CardDescription, CardTitle
+import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { showSuccess } from "@/utils/toast";
+import { Sparkles } from "lucide-react"; // Importar ícone de brilho
 
 interface Question {
   id: string;
@@ -21,6 +22,18 @@ const quizQuestions: Question[] = [
     id: "name",
     question: "Qual é o seu nome?",
     type: "text",
+  },
+  {
+    id: "age",
+    question: "Qual é a sua idade?",
+    type: "radio",
+    options: [
+      { text: "18-25 anos", score: 0 },
+      { text: "26-35 anos", score: 0 },
+      { text: "36-45 anos", score: 0 },
+      { text: "46-55 anos", score: 0 },
+      { text: "56+ anos", score: 0 },
+    ],
   },
   {
     id: "vivendo-no-automatico",
@@ -197,10 +210,12 @@ const QuizPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-4">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-background p-4 relative overflow-hidden
+      before:content-[''] before:absolute before:inset-0 before:bg-gradient-radial before:from-primary/10 before:to-transparent before:animate-pulse-slow before:z-0">
+      <Card key={currentQuestionIndex} className="w-full max-w-md relative z-10 animate-in fade-in-0 zoom-in-95">
         <CardHeader className="text-center">
-          <h2 className="text-2xl font-bold mb-4 text-foreground">Descubra em que ponto da sua jornada interior você está</h2>
+          <Sparkles className="mx-auto h-10 w-10 text-primary mb-4" />
+          <h2 className="text-2xl font-bold mb-4 text-foreground">Descubra seu caminho para o autoconhecimento e equilíbrio.</h2>
         </CardHeader>
         <CardContent>
           <Label htmlFor={currentQuestion.id} className="mb-4 block text-lg font-medium text-foreground">
