@@ -157,6 +157,21 @@ const quizQuestions: Question[] = [
   },
 ];
 
+// Mapeamento de índices de pergunta para caminhos de imagem
+const questionImages: { [key: number]: string } = {
+  0: "/images/Image_fx (2).png", // Para "Qual é o seu nome?"
+  1: "/images/1.png", // Para "Qual é a sua idade?"
+  2: "/images/2.png", // Para "Você sente que está vivendo no automático...?"
+  3: "/images/3.png", // Para "Com que frequência você sente que algo dentro de você está “travado”?"
+  4: "/images/4.png", // Para "Como está sua energia emocional hoje?"
+  5: "/images/5.png", // Para "Você sente que expressa quem realmente é...?"
+  7: "/images/7.png", // Para "Como está sua relação com sua espiritualidade?"
+  8: "/images/8.png", // Para "Você se sente merecedora das coisas boas que deseja?"
+  9: "/images/9.png", // Para "Quantas vezes por semana você se sente esgotada...?"
+  10: "/images/10.png", // Para "Você sente clareza sobre seus próximos passos na vida?"
+  11: "/images/11.png", // Para "Quando algo dá errado, você costuma…?"
+};
+
 const QuizPage = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
@@ -164,6 +179,7 @@ const QuizPage = () => {
   const navigate = useNavigate();
 
   const currentQuestion = quizQuestions[currentQuestionIndex];
+  const currentImageSrc = questionImages[currentQuestionIndex];
 
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (currentQuestion.id === "name") {
@@ -226,12 +242,19 @@ const QuizPage = () => {
       <Card key={currentQuestionIndex} className="w-full max-w-md relative z-10 animate-in fade-in-0 zoom-in-95">
         <CardHeader className="text-center">
           <Sparkles className="mx-auto h-10 w-10 text-primary mb-4" />
-          <h2 className="text-2xl font-bold mb-4 text-foreground">Descubra seu caminho para o autoconhecimento e equilíbrio.</h2>
+          {/* O texto introdutório foi removido conforme solicitado */}
         </CardHeader>
         <CardContent>
           <Label htmlFor={currentQuestion.id} className="mb-4 block text-lg font-medium text-foreground">
             {currentQuestion.question}
           </Label>
+          {currentImageSrc && (
+            <img 
+              src={currentImageSrc} 
+              alt={`Imagem para a pergunta ${currentQuestionIndex + 1}`} 
+              className="w-full h-48 object-cover rounded-md mb-4" 
+            />
+          )}
           {currentQuestion.type === "text" && (
             <Input
               id={currentQuestion.id}
