@@ -68,6 +68,7 @@ const ResultsPage = () => {
           <CardDescription className="text-muted-foreground">{resultDescription}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
+          <p className="text-lg font-semibold text-foreground">Sua pontuação no quiz: <span className="font-bold text-primary">{score}</span> pontos.</p>
           <p className="text-lg font-semibold text-foreground">{callToAction}</p>
           <a href="https://terapiacosmica.tonocosmos.com.br/" target="_blank" rel="noopener noreferrer">
             <Button size="lg" className="w-full py-3 text-lg hover:scale-105 transition-transform duration-300">

@@ -159,17 +159,18 @@ const quizQuestions: Question[] = [
 
 // Mapeamento de índices de pergunta para caminhos de imagem
 const questionImages: { [key: number]: string } = {
-  0: "/images/Image_fx (2).png", // Para "Qual é o seu nome?"
-  1: "/images/1.png", // Para "Qual é a sua idade?"
   2: "/images/2.png", // Para "Você sente que está vivendo no automático...?"
   3: "/images/3.png", // Para "Com que frequência você sente que algo dentro de você está “travado”?"
   4: "/images/4.png", // Para "Como está sua energia emocional hoje?"
   5: "/images/5.png", // Para "Você sente que expressa quem realmente é...?"
+  6: "/images/6.png", // Para "Você sente que carrega dores antigas...?" (Adicionei a imagem 6 aqui, se existir)
   7: "/images/7.png", // Para "Como está sua relação com sua espiritualidade?"
   8: "/images/8.png", // Para "Você se sente merecedora das coisas boas que deseja?"
   9: "/images/9.png", // Para "Quantas vezes por semana você se sente esgotada...?"
   10: "/images/10.png", // Para "Você sente clareza sobre seus próximos passos na vida?"
   11: "/images/11.png", // Para "Quando algo dá errado, você costuma…?"
+  12: "/images/12.png", // Para "Você sente que sua autoimagem corresponde...?" (Adicionei a imagem 12 aqui, se existir)
+  13: "/images/13.png", // Para "Qual dessas frases mais descreve seu momento atual?" (Adicionei a imagem 13 aqui, se existir)
 };
 
 const QuizPage = () => {
