@@ -10,11 +10,18 @@ const Index = () => {
         <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
           Descubra seu caminho para o autoconhecimento e equilíbrio.
         </p>
-        <Link to="/funil">
-          <Button size="lg" className="px-8 py-4 text-lg">
-            Iniciar Jornada Cósmica
-          </Button>
-        </Link>
+        <div className="flex flex-col space-y-4">
+          <Link to="/funil">
+            <Button size="lg" className="px-8 py-4 text-lg w-full">
+              Iniciar Jornada Cósmica (Funil)
+            </Button>
+          </Link>
+          <Link to="/quiz">
+            <Button size="lg" variant="secondary" className="px-8 py-4 text-lg w-full">
+              Fazer Quiz de Autoconhecimento
+            </Button>
+          </Link>
+        </div>
       </div>
       <MadeWithDyad />
     </div>
