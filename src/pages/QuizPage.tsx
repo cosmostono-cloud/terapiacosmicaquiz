@@ -159,17 +159,18 @@ const quizQuestions: Question[] = [
 
 // Mapeamento de índices de pergunta para caminhos de imagem
 const questionImages: { [key: number]: string } = {
-  2: "/images/Image_fx.png", // Nova imagem para a primeira pergunta com imagem
+  2: "/images/Image_fx.png", // Para "Você sente que está vivendo no automático...?"
   3: "/images/2.png",
   4: "/images/3.png",
   5: "/images/4.png",
-  6: "/images/5.png",
+  6: "/images/5.png", // Para "Você sente que carrega dores antigas...?"
   7: "/images/7.png",
-  8: "/images/8.png",
-  9: "/images/9.png",
-  10: "/images/10.png",
-  11: "/images/11.png",
-  // As perguntas 0 (nome), 1 (idade), 12 e 13 não terão imagens.
+  8: "/images/9.png", // Invertido: Agora usa a imagem 9
+  9: "/images/8.png", // Invertido: Agora usa a imagem 8
+  10: "/images/11.png", // Invertido: Agora usa a imagem 11
+  11: "/images/10.png", // Invertido: Agora usa a imagem 10
+  12: "/images/12.png", // Para "Você sente que sua autoimagem corresponde...?" (se existir)
+  13: "/images/13.png", // Para "Qual dessas frases mais descreve seu momento atual?" (se existir)
 };
 
 const QuizPage = () => {
