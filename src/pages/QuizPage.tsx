@@ -200,7 +200,7 @@ const QuizPage = () => {
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <h2 className="text-2xl font-bold mb-4 text-foreground">Descubra seu caminho para o autoconhecimento e equilíbrio.</h2>
+          <h2 className="text-2xl font-bold mb-4 text-foreground">Descubra em que ponto da sua jornada interior você está</h2>
         </CardHeader>
         <CardContent>
           <Label htmlFor={currentQuestion.id} className="mb-4 block text-lg font-medium text-foreground">
