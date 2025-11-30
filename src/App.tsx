@@ -3,10 +3,11 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
+import QuizPage from "./pages/QuizPage";
 import FunnelPage from "./pages/FunnelPage";
-import QuizPage from "./pages/QuizPage"; // Import the new QuizPage
+import LoadingPage from "./pages/LoadingPage"; // Importar a nova LoadingPage
+import ResultsPage from "./pages/ResultsPage"; // Importar a nova ResultsPage
+import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -17,9 +18,10 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<QuizPage />} /> {/* Agora o quiz é a página inicial */}
           <Route path="/funil" element={<FunnelPage />} />
-          <Route path="/quiz" element={<QuizPage />} /> {/* New route for the quiz */}
+          <Route path="/loading" element={<LoadingPage />} /> {/* Rota para a página de carregamento */}
+          <Route path="/results" element={<ResultsPage />} /> {/* Rota para a página de resultados */}
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

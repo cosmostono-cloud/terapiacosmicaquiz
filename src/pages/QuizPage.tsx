@@ -166,7 +166,9 @@ const QuizPage = () => {
   const currentQuestion = quizQuestions[currentQuestionIndex];
 
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserName(e.target.value);
+    if (currentQuestion.id === "name") {
+      setUserName(e.target.value);
+    }
     setAnswers((prev) => ({ ...prev, [currentQuestion.id]: e.target.value }));
   };
 
@@ -175,7 +177,7 @@ const QuizPage = () => {
   };
 
   const nextQuestion = () => {
-    if (currentQuestion.type === "text" && !userName.trim()) {
+    if (currentQuestion.type === "text" && !answers[currentQuestion.id]?.trim()) {
       showSuccess("Por favor, insira seu nome.");
       return;
     }
@@ -198,15 +200,23 @@ const QuizPage = () => {
   };
 
   const calculateScoreAndRedirect = () => {
+    let totalScore = 0;
+    quizQuestions.forEach((q) => {
+      if (q.type === "radio" && q.options) {
+        const selectedOptionText = answers[q.id];
+        const selectedOption = q.options.find(opt => opt.text === selectedOptionText);
+        if (selectedOption) {
+          totalScore += selectedOption.score;
+        }
+      }
+    });
+
     console.log("Nome:", userName);
+    console.log("Pontuação Total:", totalScore);
     console.log("Respostas:", answers);
 
-    showSuccess(
-      `Olá ${userName}, com base nas suas respostas, percebo que você está num momento de transição interna e precisa de clareza, equilíbrio e liberação energética. A Terapia Holística vai te ajudar a destravar padrões, limpar emoções antigas e realinhar sua energia para que você viva com mais leveza e direção. Quer receber mais detalhes?`,
-    );
-    setTimeout(() => {
-      window.location.href = "https://terapiacosmica.tonocosmos.com.br/";
-    }, 2000); // Redirect after a short delay
+    // Redireciona para a página de carregamento, passando o nome e a pontuação
+    navigate("/loading", { state: { userName, score: totalScore } });
   };
 
   return (
@@ -226,7 +236,7 @@ const QuizPage = () => {
               id={currentQuestion.id}
               type="text"
               placeholder="Seu nome"
-              value={userName}
+              value={answers[currentQuestion.id] || ""}
               onChange={handleTextChange}
               className="w-full"
             />
