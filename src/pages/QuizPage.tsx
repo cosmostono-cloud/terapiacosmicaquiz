@@ -220,8 +220,9 @@ const QuizPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-4 relative overflow-hidden
+    <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4 relative overflow-hidden
       before:content-[''] before:absolute before:inset-0 before:bg-gradient-radial before:from-primary/10 before:to-transparent before:animate-pulse-slow before:z-0">
+      <h1 className="text-4xl font-bold text-primary mb-8 z-10">Tô no Cosmos</h1>
       <Card key={currentQuestionIndex} className="w-full max-w-md relative z-10 animate-in fade-in-0 zoom-in-95">
         <CardHeader className="text-center">
           <Sparkles className="mx-auto h-10 w-10 text-primary mb-4" />

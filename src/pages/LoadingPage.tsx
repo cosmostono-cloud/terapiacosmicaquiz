@@ -26,6 +26,7 @@ const LoadingPage = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4 relative overflow-hidden
       before:content-[''] before:absolute before:inset-0 before:bg-gradient-radial before:from-primary/10 before:to-transparent before:animate-pulse-slow before:z-0">
+      <h1 className="text-4xl font-bold text-primary mb-8 z-10">Tô no Cosmos</h1>
       <div className="text-center z-10">
         <Loader2 className="h-16 w-16 animate-spin text-primary mb-6 mx-auto" />
         <h1 className="text-3xl font-bold text-foreground mb-2">Preparando seu resultado...</h1>
