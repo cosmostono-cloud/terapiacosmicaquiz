@@ -169,8 +169,8 @@ const questionImages: { [key: number]: string } = {
   9: "/images/8.png", // Invertido: Agora usa a imagem 8
   10: "/images/11.png", // Invertido: Agora usa a imagem 11
   11: "/images/10.png", // Invertido: Agora usa a imagem 10
-  12: "/images/Image_fx (2).png", // Nova imagem para a pergunta 13 (índice 12)
-  13: "/images/13.png", // Para "Qual dessas frases mais descreve seu momento atual?" (se existir)
+  12: "/images/Image_fx (2).png", // Imagem para a pergunta 13 (índice 12)
+  13: "/images/pensamento.png", // Nova imagem para a pergunta 14 (índice 13)
 };
 
 const QuizPage = () => {

@@ -20,9 +20,9 @@ const ResultsPage = () => {
             <CardTitle className="text-2xl font-bold text-foreground">Erro ao carregar resultados</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-muted-foreground mb-6">Por favor, refaça o quiz para ver seu resultado.</p>
+            <p className="text-muted-foreground mb-6">Parece que você chegou aqui sem passar pelo quiz. Por favor, inicie sua jornada para descobrir seu perfil!</p>
             <Link to="/">
-              <Button>Iniciar Quiz</Button>
+              <Button>Iniciar Jornada</Button>
             </Link>
           </CardContent>
         </Card>
@@ -38,41 +38,49 @@ const ResultsPage = () => {
 
   // Definição dos perfis com base na pontuação (Max score = 120)
   if (score >= 81) {
-    resultTitle = "Você está no perfil: Travada 🔒";
-    resultDescription = `Olá ${userName}, com base nas suas respostas, percebo que você está num momento de transição interna e precisa de clareza, equilíbrio e liberação energética. Há padrões e emoções antigas que estão te impedindo de avançar. A Terapia Cósmica vai te ajudar a destravar esses bloqueios e realinhar sua energia para que você viva com mais leveza e direção.`;
-    resultIcon = <Lock className="h-12 w-12 text-destructive mb-4 mx-auto" />;
+    resultTitle = "Seu Perfil: Travada 🔒";
+    resultDescription = `Olá ${userName}, suas respostas revelam um potencial imenso, mas também indicam que você está em um ponto de virada, sentindo-se "travada" por padrões e emoções antigas. Este é o momento de buscar clareza, equilíbrio e uma profunda liberação energética. A Terapia Cósmica é o caminho para destravar esses bloqueios, realinhar sua energia e impulsionar você para uma vida de leveza e propósito.`;
+    resultIcon = <Lock className="h-16 w-16 text-destructive mb-4 mx-auto animate-bounce-slow" />;
     resultColor = "text-destructive";
-    callToAction = "Quer receber mais detalhes e iniciar sua transformação?";
+    callToAction = "Pronta para se libertar e iniciar sua transformação agora?";
   } else if (score >= 41) {
-    resultTitle = "Você está no perfil: Em Despertar 💡";
-    resultDescription = `Olá ${userName}, suas respostas indicam que você está em um processo de despertar, buscando maior autoconhecimento e equilíbrio. Você já percebe a necessidade de mudança e está aberta a novas perspectivas. A Terapia Cósmica pode acelerar sua jornada, oferecendo ferramentas para limpar o que não serve mais e fortalecer sua conexão interior.`;
-    resultIcon = <Lightbulb className="h-12 w-12 text-primary mb-4 mx-auto" />;
+    resultTitle = "Seu Perfil: Em Despertar 💡";
+    resultDescription = `Olá ${userName}, suas respostas mostram que você está em um belo processo de despertar, buscando ativamente autoconhecimento e um maior equilíbrio. Você já sente o chamado para a mudança e está aberta a expandir suas perspectivas. A Terapia Cósmica pode ser o catalisador que você precisa para acelerar essa jornada, oferecendo ferramentas poderosas para purificar o que não serve mais e fortalecer sua conexão interior.`;
+    resultIcon = <Lightbulb className="h-16 w-16 text-primary mb-4 mx-auto animate-bounce-slow" />;
     resultColor = "text-primary";
-    callToAction = "Pronta para aprofundar seu despertar e encontrar sua verdadeira essência?";
+    callToAction = "Deseja aprofundar seu despertar e manifestar sua verdadeira essência?";
   } else {
-    resultTitle = "Você está no perfil: Em Evolução 🌱";
-    resultDescription = `Olá ${userName}, suas respostas mostram que você já está em um caminho de evolução e conexão, com boa clareza e equilíbrio. Você busca aprimorar ainda mais sua jornada e dar os próximos passos em direção à sua versão mais elevada. A Terapia Cósmica pode oferecer suporte para manter essa energia, expandir sua consciência e manifestar seus maiores desejos.`;
-    resultIcon = <Leaf className="h-12 w-12 text-green-500 mb-4 mx-auto" />;
+    resultTitle = "Seu Perfil: Em Evolução 🌱";
+    resultDescription = `Olá ${userName}, suas respostas brilham, indicando que você já está em um caminho de evolução e profunda conexão, com clareza e equilíbrio notáveis. Você busca aprimorar ainda mais sua jornada, elevando-se à sua versão mais autêntica e poderosa. A Terapia Cósmica oferece o suporte ideal para sustentar essa energia, expandir sua consciência e cocriar seus maiores desejos com o universo.`;
+    resultIcon = <Leaf className="h-16 w-16 text-green-500 mb-4 mx-auto animate-bounce-slow" />;
     resultColor = "text-green-500";
-    callToAction = "Que tal explorar novas dimensões do seu ser e continuar sua evolução?";
+    callToAction = "Que tal explorar novas dimensões do seu ser e continuar sua ascensão?";
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4 relative overflow-hidden
-      before:content-[''] before:absolute before:inset-0 before:bg-gradient-radial before:from-primary/10 before:to-transparent before:animate-pulse-slow before:z-0">
-      <h1 className="text-4xl font-bold text-primary mb-8 z-10">Tô no Cosmos</h1>
-      <Card className="w-full max-w-md text-center relative z-10 animate-in fade-in-0 zoom-in-95">
-        <CardHeader>
+    <div 
+      className="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden bg-cover bg-center"
+      style={{ backgroundImage: `url('/images/pensamento.png')` }}
+    >
+      {/* Overlay para escurecer a imagem de fundo e melhorar a legibilidade */}
+      <div className="absolute inset-0 bg-black opacity-70 z-0"></div>
+      
+      {/* Efeito de pulsação sutil no fundo */}
+      <div className="absolute inset-0 bg-gradient-radial from-primary/10 to-transparent animate-pulse-slow z-0"></div>
+
+      <h1 className="text-5xl font-extrabold text-primary mb-10 z-10 drop-shadow-lg">Tô no Cosmos</h1>
+      <Card className="w-full max-w-lg text-center relative z-10 bg-card/90 backdrop-blur-sm animate-in fade-in-0 zoom-in-95 duration-700 shadow-2xl border-primary/30">
+        <CardHeader className="pt-8">
           {resultIcon}
-          <CardTitle className={`text-2xl font-bold ${resultColor} mb-2`}>{resultTitle}</CardTitle>
-          <CardDescription className="text-muted-foreground">{resultDescription}</CardDescription>
+          <CardTitle className={`text-3xl font-bold ${resultColor} mb-3 leading-tight`}>{resultTitle}</CardTitle>
+          <CardDescription className="text-lg text-muted-foreground px-4">{resultDescription}</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-6">
-          <p className="text-lg font-semibold text-foreground">Sua pontuação no quiz: <span className="font-bold text-primary">{score}</span> pontos.</p>
-          <p className="text-lg font-semibold text-foreground">{callToAction}</p>
+        <CardContent className="space-y-8 pb-8">
+          <p className="text-xl font-semibold text-foreground">Sua pontuação na jornada: <span className="font-bold text-primary text-2xl">{score}</span> pontos.</p>
+          <p className="text-xl font-bold text-foreground">{callToAction}</p>
           <a href="https://terapiacosmica.tonocosmos.com.br/" target="_blank" rel="noopener noreferrer">
-            <Button size="lg" className="w-full py-3 text-lg hover:scale-105 transition-transform duration-300">
-              Quero Saber Mais!
+            <Button size="lg" className="w-full py-4 text-xl font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 transform hover:scale-105 shadow-lg">
+              Quero Iniciar Minha Transformação!
             </Button>
           </a>
         </CardContent>
