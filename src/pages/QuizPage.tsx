@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card"; // Removido CardDescription, CardTitle
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { showSuccess } from "@/utils/toast";
@@ -23,135 +23,123 @@ const quizQuestions: Question[] = [
     type: "text",
   },
   {
-    id: "desequilibrio",
-    question: "Com que frequência você se sente em desequilíbrio ou com a energia baixa?",
+    id: "vivendo-no-automatico",
+    question: "Você sente que está vivendo no automático ou consegue estar presente no dia a dia?",
     type: "radio",
     options: [
-      { text: "Nunca ou raramente", score: 0 },
+      { text: "Sempre no automático", score: 10 },
+      { text: "Às vezes presente", score: 5 },
+      { text: "Geralmente presente", score: 0 },
+    ],
+  },
+  {
+    id: "travado",
+    question: "Com que frequência você sente que algo dentro de você está “travado”?",
+    type: "radio",
+    options: [
+      { text: "Quase todos os dias", score: 10 },
       { text: "Às vezes", score: 5 },
-      { text: "Frequentemente", score: 10 },
-      { text: "Quase sempre", score: 15 },
-      { text: "Constantemente", score: 20 },
+      { text: "Raramente", score: 0 },
     ],
   },
   {
-    id: "mudancas",
-    question: "Como você lida com mudanças inesperadas na vida?",
+    id: "energia-emocional",
+    question: "Como está sua energia emocional hoje?",
     type: "radio",
     options: [
-      { text: "Com muita facilidade e adaptação", score: 0 },
-      { text: "Bem, consigo me ajustar", score: 5 },
-      { text: "Com alguma dificuldade, mas supero", score: 10 },
-      { text: "Com muita dificuldade e resistência", score: 15 },
-      { text: "Sinto-me paralisado(a)", score: 20 },
+      { text: "Instável", score: 10 },
+      { text: "Mediana", score: 5 },
+      { text: "Equilibrada", score: 0 },
     ],
   },
   {
-    id: "intuicao",
-    question: "Qual o seu nível de conexão com sua intuição ou 'voz interior'?",
+    id: "expressa-quem-realmente-e",
+    question: "Você sente que expressa quem realmente é, sem medo de julgamentos?",
     type: "radio",
     options: [
-      { text: "Muito conectado(a), confio plenamente", score: 0 },
-      { text: "Conectado(a), mas às vezes duvido", score: 5 },
-      { text: "Neutro, não presto muita atenção", score: 10 },
-      { text: "Desconectado(a), sinto que não tenho", score: 15 },
-      { text: "Completamente desconectado(a)", score: 20 },
+      { text: "Quase nunca", score: 10 },
+      { text: "Às vezes", score: 5 },
+      { text: "Sim, na maior parte do tempo", score: 0 },
     ],
   },
   {
-    id: "proposito",
-    question: "Com que frequência você sente que está vivendo seu propósito de vida?",
+    id: "dores-antigas",
+    question: "Você sente que carrega dores antigas ou memórias que ainda influenciam sua vida atual?",
     type: "radio",
     options: [
-      { text: "Diariamente, com clareza", score: 0 },
-      { text: "Frequentemente, tenho uma boa ideia", score: 5 },
-      { text: "Às vezes, mas ainda busco", score: 10 },
-      { text: "Raramente, sinto-me perdido(a)", score: 15 },
-      { text: "Nunca, não sei qual é meu propósito", score: 20 },
+      { text: "Sim, claramente", score: 10 },
+      { text: "Talvez", score: 5 },
+      { text: "Acho que não", score: 0 },
     ],
   },
   {
-    id: "perdao",
-    question: "Como você descreveria sua capacidade de perdoar a si mesmo(a) e aos outros?",
+    id: "relacao-espiritualidade",
+    question: "Como está sua relação com sua espiritualidade?",
     type: "radio",
     options: [
-      { text: "Muito fácil, pratico o perdão", score: 0 },
-      { text: "Fácil, consigo perdoar na maioria das vezes", score: 5 },
-      { text: "Moderado, às vezes é um desafio", score: 10 },
-      { text: "Difícil, guardo ressentimentos", score: 15 },
-      { text: "Muito difícil, não consigo perdoar", score: 20 },
+      { text: "Distante", score: 10 },
+      { text: "Em busca de conexão", score: 5 },
+      { text: "Conectada", score: 0 },
     ],
   },
   {
-    id: "paz",
-    question: "Com que frequência você se sente em paz e harmonia consigo mesmo(a)?",
+    id: "merecedora",
+    question: "Você se sente merecedora das coisas boas que deseja?",
     type: "radio",
     options: [
-      { text: "Quase sempre", score: 0 },
-      { text: "Frequentemente", score: 5 },
-      { text: "Às vezes", score: 10 },
-      { text: "Raramente", score: 15 },
-      { text: "Nunca", score: 20 },
+      { text: "Quase nunca", score: 10 },
+      { text: "Às vezes", score: 5 },
+      { text: "Sim", score: 0 },
     ],
   },
   {
-    id: "estresse",
-    question: "Como você reage a situações de estresse ou ansiedade?",
+    id: "esgotada",
+    question: "Quantas vezes por semana você se sente esgotada emocionalmente ou energeticamente?",
     type: "radio",
     options: [
-      { text: "Mantenho a calma e encontro soluções", score: 0 },
-      { text: "Sinto um pouco de estresse, mas gerencio", score: 5 },
-      { text: "Fico ansioso(a), mas consigo seguir em frente", score: 10 },
-      { text: "Sinto-me sobrecarregado(a) e com dificuldade", score: 15 },
-      { text: "Entro em pânico ou desespero", score: 20 },
+      { text: "4+ vezes", score: 10 },
+      { text: "1 a 3 vezes", score: 5 },
+      { text: "Quase nunca", score: 0 },
     ],
   },
   {
-    id: "abundancia",
-    question: "Qual a sua percepção sobre a abundância em sua vida (não apenas financeira)?",
+    id: "clareza-proximos-passos",
+    question: "Você sente clareza sobre seus próximos passos na vida?",
     type: "radio",
     options: [
-      { text: "Sinto-me abundante em todas as áreas", score: 0 },
-      { text: "Sinto abundância na maioria das áreas", score: 5 },
-      { text: "Tenho algumas áreas de abundância, outras não", score: 10 },
-      { text: "Sinto falta de abundância em muitas áreas", score: 15 },
-      { text: "Sinto escassez em quase tudo", score: 20 },
+      { text: "Nada clara", score: 10 },
+      { text: "Parcial", score: 5 },
+      { text: "Bem clara", score: 0 },
     ],
   },
   {
-    id: "gratidao",
-    question: "Com que frequência você se sente grato(a) pelas coisas em sua vida?",
+    id: "algo-da-errado",
+    question: "Quando algo dá errado, você costuma…",
     type: "radio",
     options: [
-      { text: "Diariamente, pratico a gratidão", score: 0 },
-      { text: "Frequentemente, sou grato(a)", score: 5 },
-      { text: "Às vezes, quando me lembro", score: 10 },
-      { text: "Raramente, foco mais nos problemas", score: 15 },
-      { text: "Nunca, sinto que não tenho motivos", score: 20 },
+      { text: "Se culpar", score: 10 },
+      { text: "Ficar perdida", score: 5 },
+      { text: "Respirar e resolver", score: 0 },
     ],
   },
   {
-    id: "saude-energetica",
-    question: "Como você se sente em relação ao seu corpo e sua saúde energética?",
+    id: "autoimagem-elevada",
+    question: "Você sente que sua autoimagem corresponde à sua versão mais elevada?",
     type: "radio",
     options: [
-      { text: "Muito bem, sinto-me vital e equilibrado(a)", score: 0 },
-      { text: "Bem, com boa saúde geral", score: 5 },
-      { text: "Neutro, tenho altos e baixos", score: 10 },
-      { text: "Não muito bem, sinto desequilíbrios", score: 15 },
-      { text: "Mal, com muitos problemas energéticos/físicos", score: 20 },
+      { text: "Não", score: 10 },
+      { text: "Em processo", score: 5 },
+      { text: "Sim", score: 0 },
     ],
   },
   {
-    id: "abertura-espiritual",
-    question: "Qual o seu nível de abertura para novas perspectivas e conhecimentos espirituais?",
+    id: "momento-atual",
+    question: "Qual dessas frases mais descreve seu momento atual?",
     type: "radio",
     options: [
-      { text: "Totalmente aberto(a) e curioso(a)", score: 0 },
-      { text: "Aberto(a) e interessado(a)", score: 5 },
-      { text: "Um pouco aberto(a), mas cético(a)", score: 10 },
-      { text: "Pouco aberto(a), prefiro o que já conheço", score: 15 },
-      { text: "Fechado(a), não acredito", score: 20 },
+      { text: "Estou cansada e preciso de ajuda", score: 10 },
+      { text: "Quero mudar, mas não sei como", score: 5 },
+      { text: "Já estou em transformação e quero dar o próximo passo", score: 0 },
     ],
   },
 ];
@@ -197,42 +185,25 @@ const QuizPage = () => {
   };
 
   const calculateScoreAndRedirect = () => {
-    let totalScore = 0;
-    const maxPossibleScore = (quizQuestions.length - 1) * 20; // 11 scored questions * 20 max points each
-
-    quizQuestions.forEach((q) => {
-      if (q.type === "radio" && answers[q.id] && q.options) {
-        const selectedOption = q.options.find((opt) => opt.text === answers[q.id]);
-        if (selectedOption) {
-          totalScore += selectedOption.score;
-        }
-      }
-    });
-
-    const normalizedScore = Math.round((totalScore / maxPossibleScore) * 100);
-
     console.log("Nome:", userName);
     console.log("Respostas:", answers);
-    console.log("Pontuação total:", totalScore);
-    console.log("Pontuação normalizada (0-100):", normalizedScore);
 
-    showSuccess(`Olá ${userName}, sua pontuação é ${normalizedScore}/100. Redirecionando para a Terapia Cósmica...`);
+    showSuccess(
+      `Olá ${userName}, com base nas suas respostas, percebo que você está num momento de transição interna e precisa de clareza, equilíbrio e liberação energética. A Terapia Holística vai te ajudar a destravar padrões, limpar emoções antigas e realinhar sua energia para que você viva com mais leveza e direção. Quer receber mais detalhes?`,
+    );
     setTimeout(() => {
       window.location.href = "https://terapiacosmica.tonocosmos.com.br/";
     }, 2000); // Redirect after a short delay
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle className="text-2xl font-bold text-center">Descubra Seu Caminho</CardTitle>
-          <CardDescription className="text-center">
-            {currentQuestionIndex + 1} de {quizQuestions.length}
-          </CardDescription>
+        <CardHeader className="text-center">
+          <h2 className="text-2xl font-bold mb-4 text-foreground">Descubra seu caminho para o autoconhecimento e equilíbrio.</h2>
         </CardHeader>
         <CardContent>
-          <Label htmlFor={currentQuestion.id} className="mb-4 block text-lg font-medium">
+          <Label htmlFor={currentQuestion.id} className="mb-4 block text-lg font-medium text-foreground">
             {currentQuestion.question}
           </Label>
           {currentQuestion.type === "text" && (

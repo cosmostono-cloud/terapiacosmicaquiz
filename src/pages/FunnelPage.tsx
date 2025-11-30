@@ -8,13 +8,14 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
+import { Slider } from "@/components/ui/slider"; // Importar Slider
 import { showSuccess } from "@/utils/toast";
 
 const FunnelPage = () => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
-    age: "",
+    age: "18", // Valor inicial para o slider
     intention: "",
     previousExperience: "",
     expectations: "",
@@ -66,18 +67,18 @@ const FunnelPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold text-center">Funil de Terapia Cósmica</CardTitle>
-          <CardDescription className="text-center">
+          <CardTitle className="text-2xl font-bold text-center text-foreground">Sua Jornada de Autodescoberta</CardTitle>
+          <CardDescription className="text-center text-muted-foreground">
             Passo {step} de 5
           </CardDescription>
         </CardHeader>
         <CardContent>
           {step === 1 && (
             <div>
-              <Label htmlFor="name" className="mb-2 block">Qual é o seu nome?</Label>
+              <Label htmlFor="name" className="mb-2 block text-foreground">Qual é o seu nome?</Label>
               <Input
                 id="name"
                 type="text"
@@ -91,13 +92,14 @@ const FunnelPage = () => {
 
           {step === 2 && (
             <div>
-              <Label htmlFor="age" className="mb-2 block">Qual é a sua idade?</Label>
-              <Input
+              <Label htmlFor="age" className="mb-4 block text-foreground">Qual é a sua idade? {formData.age ? `${formData.age} anos` : ""}</Label>
+              <Slider
                 id="age"
-                type="number"
-                placeholder="Sua idade"
-                value={formData.age}
-                onChange={handleChange}
+                min={18}
+                max={99}
+                step={1}
+                value={[Number(formData.age)]}
+                onValueChange={(value) => handleRadioChange("age", String(value[0]))}
                 className="w-full"
               />
             </div>
@@ -105,7 +107,7 @@ const FunnelPage = () => {
 
           {step === 3 && (
             <div>
-              <Label className="mb-2 block">Qual é a sua intenção principal ao buscar a Terapia Cósmica?</Label>
+              <Label className="mb-2 block text-foreground">Qual é a sua intenção principal ao iniciar esta jornada?</Label>
               <RadioGroup
                 onValueChange={(value) => handleRadioChange("intention", value)}
                 value={formData.intention}
@@ -133,7 +135,7 @@ const FunnelPage = () => {
 
           {step === 4 && (
             <div>
-              <Label className="mb-2 block">Você tem alguma experiência prévia com terapias holísticas ou espirituais?</Label>
+              <Label className="mb-2 block text-foreground">Você tem alguma experiência prévia com práticas holísticas ou espirituais?</Label>
               <RadioGroup
                 onValueChange={(value) => handleRadioChange("previousExperience", value)}
                 value={formData.previousExperience}
@@ -157,7 +159,7 @@ const FunnelPage = () => {
 
           {step === 5 && (
             <div>
-              <Label htmlFor="expectations" className="mb-2 block">Quais são suas expectativas em relação à Terapia Cósmica?</Label>
+              <Label htmlFor="expectations" className="mb-2 block text-foreground">Quais são suas expectativas em relação a esta jornada?</Label>
               <Textarea
                 id="expectations"
                 placeholder="Descreva suas expectativas..."
@@ -181,7 +183,7 @@ const FunnelPage = () => {
           )}
           {step === 5 && (
             <Button onClick={handleSubmit} className="ml-auto">
-              Finalizar e Ir para a Terapia Cósmica
+              Finalizar e Continuar
             </Button>
           )}
         </CardFooter>
