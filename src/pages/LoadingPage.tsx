@@ -2,35 +2,50 @@
 
 import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Loader2 } from "lucide-react"; // Ícone de carregamento
+import { Loader2, Sparkles } from "lucide-react";
 
 const LoadingPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { userName, score } = location.state || {}; // Recebe o nome e a pontuação do quiz
+  const { userName, score } = location.state || {};
 
   useEffect(() => {
-    if (userName === undefined || score === undefined) {
-      // Se não houver dados, redireciona para o quiz para evitar erros
+    if (userName === undefined) {
       navigate("/", { replace: true });
       return;
     }
 
     const timer = setTimeout(() => {
       navigate("/results", { state: { userName, score }, replace: true });
-    }, 3000); // Simula um carregamento de 3 segundos
+    }, 3500);
 
     return () => clearTimeout(timer);
   }, [navigate, userName, score]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4 relative overflow-hidden
-      before:content-[''] before:absolute before:inset-0 before:bg-gradient-radial before:from-primary/10 before:to-transparent before:animate-pulse-slow before:z-0">
-      <h1 className="text-4xl font-bold text-primary mb-8 z-10">Tô no Cosmos</h1>
-      <div className="text-center z-10">
-        <Loader2 className="h-16 w-16 animate-spin text-primary mb-6 mx-auto" />
-        <h1 className="text-3xl font-bold text-foreground mb-2">Preparando seu resultado...</h1>
-        <p className="text-lg text-muted-foreground">Aguarde um momento enquanto analisamos suas respostas.</p>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-background p-6 relative overflow-hidden">
+      <div className="absolute inset-0 bg-primary/5 blur-[120px] rounded-full animate-pulse"></div>
+      
+      <div className="relative z-10 text-center space-y-8">
+        <div className="inline-flex items-center gap-2 px-4 py-1 border border-primary/30 rounded-full bg-primary/5 text-[10px] tracking-[0.3em] font-bold text-primary uppercase mb-4">
+          <Sparkles size={12} /> Sintonizando Frequência
+        </div>
+        
+        <div className="relative">
+          <Loader2 className="h-20 w-20 animate-spin text-primary mx-auto opacity-50" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-2 h-2 bg-white rounded-full animate-ping"></div>
+          </div>
+        </div>
+
+        <h1 className="text-3xl font-black text-white tracking-tighter">
+          Analisando sua <br />
+          <span className="text-primary">Assinatura Energética...</span>
+        </h1>
+        
+        <p className="text-muted-foreground text-sm tracking-widest uppercase font-bold opacity-50">
+          Aguarde a calibração final
+        </p>
       </div>
     </div>
   );

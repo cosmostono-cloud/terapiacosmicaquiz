@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card"
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { showSuccess } from "@/utils/toast";
-import { Sparkles } from "lucide-react"; // Importar ícone de brilho
+import { Sparkles, Headphones, Zap, ShieldCheck } from "lucide-react";
 
 interface Question {
   id: string;
@@ -18,11 +18,7 @@ interface Question {
 }
 
 const quizQuestions: Question[] = [
-  {
-    id: "name",
-    question: "Qual é o seu nome?",
-    type: "text",
-  },
+  { id: "name", question: "Qual é o seu nome?", type: "text" },
   {
     id: "age",
     question: "Qual é a sua idade?",
@@ -157,23 +153,23 @@ const quizQuestions: Question[] = [
   },
 ];
 
-// Mapeamento de índices de pergunta para caminhos de imagem
 const questionImages: { [key: number]: string } = {
-  2: "/images/Image_fx.png", // Para "Você sente que está vivendo no automático...?"
+  2: "/images/Image_fx.png",
   3: "/images/2.png",
   4: "/images/3.png",
   5: "/images/4.png",
-  6: "/images/5.png", // Para "Você sente que carrega dores antigas...?"
+  6: "/images/5.png",
   7: "/images/7.png",
-  8: "/images/9.png", // Invertido: Agora usa a imagem 9
-  9: "/images/8.png", // Invertido: Agora usa a imagem 8
-  10: "/images/11.png", // Invertido: Agora usa a imagem 11
-  11: "/images/10.png", // Invertido: Agora usa a imagem 10
-  12: "/images/Image_fx (2).png", // Imagem para a pergunta 13 (índice 12)
-  13: "/images/pensamento.png", // Nova imagem para a pergunta 14 (índice 13)
+  8: "/images/9.png",
+  9: "/images/8.png",
+  10: "/images/11.png",
+  11: "/images/10.png",
+  12: "/images/Image_fx (2).png",
+  13: "/images/pensamento.png",
 };
 
 const QuizPage = () => {
+  const [started, setStarted] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
   const [userName, setUserName] = useState("");
@@ -183,9 +179,7 @@ const QuizPage = () => {
   const currentImageSrc = questionImages[currentQuestionIndex];
 
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (currentQuestion.id === "name") {
-      setUserName(e.target.value);
-    }
+    if (currentQuestion.id === "name") setUserName(e.target.value);
     setAnswers((prev) => ({ ...prev, [currentQuestion.id]: e.target.value }));
   };
 
@@ -210,85 +204,138 @@ const QuizPage = () => {
     }
   };
 
-  const prevQuestion = () => {
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex((prev) => prev - 1);
-    }
-  };
-
   const calculateScoreAndRedirect = () => {
     let totalScore = 0;
     quizQuestions.forEach((q) => {
       if (q.type === "radio" && q.options) {
-        const selectedOptionText = answers[q.id];
-        const selectedOption = q.options.find(opt => opt.text === selectedOptionText);
-        if (selectedOption) {
-          totalScore += selectedOption.score;
-        }
+        const selectedOption = q.options.find(opt => opt.text === answers[q.id]);
+        if (selectedOption) totalScore += selectedOption.score;
       }
     });
-
-    console.log("Nome:", userName);
-    console.log("Pontuação Total:", totalScore);
-    console.log("Respostas:", answers);
-
-    // Redireciona para a página de carregamento, passando o nome e a pontuação
     navigate("/loading", { state: { userName, score: totalScore } });
   };
 
+  if (!started) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-background p-6 text-center overflow-hidden relative">
+        <div className="absolute top-10 px-4 py-1 border border-primary/50 rounded-full bg-primary/10 text-[10px] tracking-[0.2em] font-bold text-primary flex items-center gap-2 uppercase">
+          <Sparkles size={12} /> Nível 1: A Descoberta
+        </div>
+        
+        <div className="relative mb-12 mt-20">
+          <div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full"></div>
+          <img 
+            src="/images/Image_fx.png" 
+            alt="Consciência" 
+            className="w-64 h-64 object-cover rounded-full border-2 border-primary/30 relative z-10 shadow-[0_0_50px_rgba(168,85,247,0.4)]"
+          />
+        </div>
+
+        <h1 className="text-4xl md:text-6xl font-black text-white mb-4 leading-tight max-w-3xl">
+          Descubra Quem Está <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-400 to-blue-400">
+            Dirigindo Sua Realidade
+          </span>
+        </h1>
+
+        <p className="text-muted-foreground text-lg mb-12 max-w-xl">
+          Em menos de 2 minutos você vai descobrir qual força invisível está moldando seus resultados agora.
+        </p>
+
+        <Button 
+          onClick={() => setStarted(true)}
+          className="h-16 px-10 text-xl font-bold rounded-full bg-white text-black hover:bg-white/90 transition-all glow-primary group"
+        >
+          👉 FAZER TESTE GRATUITO
+        </Button>
+
+        <div className="grid grid-cols-3 gap-4 mt-16 w-full max-w-md">
+          {["RÁPIDO", "PRECISO", "GRATUITO"].map((item) => (
+            <div key={item} className="py-2 border border-white/10 rounded-lg bg-white/5 text-[10px] tracking-widest font-bold text-muted-foreground">
+              {item}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4 relative overflow-hidden
-      before:content-[''] before:absolute before:inset-0 before:bg-gradient-radial before:from-primary/10 before:to-transparent before:animate-pulse-slow before:z-0">
-      <h1 className="text-4xl font-bold text-primary mb-8 z-10">Tô no Cosmos</h1>
-      <Card key={currentQuestionIndex} className="w-full max-w-md relative z-10 animate-in fade-in-0 zoom-in-95">
-        <CardHeader className="text-center">
-          <Sparkles className="mx-auto h-10 w-10 text-primary mb-4" />
-          {/* O texto introdutório foi removido conforme solicitado */}
+    <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4 relative overflow-hidden">
+      <div className="absolute top-10 px-4 py-1 border border-primary/50 rounded-full bg-primary/10 text-[10px] tracking-[0.2em] font-bold text-primary flex items-center gap-2 uppercase z-20">
+        <Sparkles size={12} /> Nível 1: A Descoberta
+      </div>
+
+      <Card className="w-full max-w-md glass-card relative z-10 animate-in fade-in zoom-in duration-500">
+        <CardHeader className="text-center pt-12">
+          <div className="w-full bg-white/5 h-1 rounded-full mb-8 overflow-hidden">
+            <div 
+              className="bg-primary h-full transition-all duration-500 shadow-[0_0_10px_rgba(168,85,247,0.8)]" 
+              style={{ width: `${((currentQuestionIndex + 1) / quizQuestions.length) * 100}%` }}
+            ></div>
+          </div>
         </CardHeader>
         <CardContent>
-          <Label htmlFor={currentQuestion.id} className="mb-4 block text-lg font-medium text-foreground">
+          <Label className="mb-6 block text-xl font-bold text-white leading-snug">
             {currentQuestion.question}
           </Label>
+          
           {currentImageSrc && (
-            <img 
-              src={currentImageSrc} 
-              alt={`Imagem para a pergunta ${currentQuestionIndex + 1}`} 
-              className="w-full h-48 object-cover rounded-md mb-4" 
-            />
+            <div className="relative mb-6 group">
+              <div className="absolute inset-0 bg-primary/10 blur-xl group-hover:bg-primary/20 transition-all"></div>
+              <img 
+                src={currentImageSrc} 
+                alt="Visual" 
+                className="w-full h-56 object-cover rounded-2xl border border-white/10 relative z-10" 
+              />
+            </div>
           )}
-          {currentQuestion.type === "text" && (
+
+          {currentQuestion.type === "text" ? (
             <Input
-              id={currentQuestion.id}
-              type="text"
               placeholder="Seu nome"
               value={answers[currentQuestion.id] || ""}
               onChange={handleTextChange}
-              className="w-full"
+              className="h-14 bg-white/5 border-white/10 text-lg focus:border-primary/50 transition-all"
             />
-          )}
-          {currentQuestion.type === "radio" && currentQuestion.options && (
+          ) : (
             <RadioGroup
               onValueChange={handleRadioChange}
               value={answers[currentQuestion.id] || ""}
               className="space-y-3"
             >
-              {currentQuestion.options.map((option, index) => (
-                <div key={index} className="flex items-center space-x-3">
-                  <RadioGroupItem value={option.text} id={`${currentQuestion.id}-${index}`} />
-                  <Label htmlFor={`${currentQuestion.id}-${index}`}>{option.text}</Label>
+              {currentQuestion.options?.map((option, index) => (
+                <div key={index} className="relative">
+                  <RadioGroupItem 
+                    value={option.text} 
+                    id={`${currentQuestion.id}-${index}`} 
+                    className="peer sr-only"
+                  />
+                  <Label 
+                    htmlFor={`${currentQuestion.id}-${index}`}
+                    className="flex items-center p-4 rounded-xl border border-white/10 bg-white/5 cursor-pointer transition-all peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10 hover:bg-white/10"
+                  >
+                    <div className="w-4 h-4 rounded-full border border-white/30 mr-3 flex items-center justify-center peer-data-[state=checked]:border-primary">
+                      <div className="w-2 h-2 rounded-full bg-primary scale-0 transition-transform peer-data-[state=checked]:scale-100"></div>
+                    </div>
+                    <span className="text-white font-medium">{option.text}</span>
+                  </Label>
                 </div>
               ))}
             </RadioGroup>
           )}
         </CardContent>
-        <CardFooter className="flex justify-between">
+        <CardFooter className="flex justify-between pb-8">
           {currentQuestionIndex > 0 && (
-            <Button variant="outline" onClick={prevQuestion}>
+            <Button variant="ghost" onClick={() => setCurrentQuestionIndex(prev => prev - 1)} className="text-muted-foreground hover:text-white">
               Anterior
             </Button>
           )}
-          <Button onClick={nextQuestion} className="ml-auto">
-            {currentQuestionIndex < quizQuestions.length - 1 ? "Próximo" : "Finalizar e Ver Resultado"}
+          <Button 
+            onClick={nextQuestion} 
+            className="ml-auto h-12 px-8 bg-primary text-white hover:bg-primary/90 glow-primary font-bold rounded-xl"
+          >
+            {currentQuestionIndex < quizQuestions.length - 1 ? "Próximo" : "Ver Resultado"}
           </Button>
         </CardFooter>
       </Card>
