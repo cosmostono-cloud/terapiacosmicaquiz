@@ -186,7 +186,6 @@ const QuizPage = () => {
   const handleRadioChange = (value: string) => {
     setAnswers((prev) => ({ ...prev, [currentQuestion.id]: value }));
     
-    // Avanço automático com um pequeno delay para feedback visual
     setTimeout(() => {
       if (currentQuestionIndex < quizQuestions.length - 1) {
         setCurrentQuestionIndex((prev) => prev + 1);
@@ -225,57 +224,53 @@ const QuizPage = () => {
       <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center relative overflow-hidden bg-background">
         <div className="nebula-bg" />
         
-        <div className="mb-8 px-6 py-1.5 border border-white/20 rounded-full bg-black/40 text-[10px] tracking-[0.3em] font-bold text-white flex items-center gap-2 uppercase">
+        <div className="mb-6 px-6 py-1.5 border border-white/20 rounded-full bg-black/40 text-[10px] tracking-[0.3em] font-bold text-white flex items-center gap-2 uppercase">
           <Sparkles size={12} className="text-primary" /> NÍVEL 1: A DESCOBERTA
         </div>
         
-        <div className="relative mb-12">
+        <div className="relative mb-8">
           <div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full animate-pulse"></div>
           <img 
             src="/images/cerebro-quantico.png" 
             alt="Cérebro Quântico" 
-            className="w-64 h-64 md:w-80 md:h-80 object-cover rounded-full border-2 border-primary/30 relative z-10 shadow-[0_0_50px_rgba(168,85,247,0.3)]"
+            className="w-48 h-48 md:w-80 md:h-80 object-cover rounded-full border-2 border-primary/30 relative z-10 shadow-[0_0_50px_rgba(168,85,247,0.3)]"
           />
         </div>
 
-        <div className="flex flex-col items-center gap-1 mb-6">
-          <div className="bg-[#1A0B2E] px-6 py-2">
-            <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase">
-              Descubra Quem Está
-            </h1>
-          </div>
-          <div className="bg-[#1A0B2E] px-6 py-2">
-            <h1 className="text-4xl md:text-6xl font-black text-primary tracking-tighter uppercase">
-              Dirigindo Sua Realidade
-            </h1>
-          </div>
-        </div>
-
-        <div className="bg-[#1A0B2E]/60 px-6 py-3 mb-12 max-w-2xl">
-          <p className="text-white text-sm md:text-base font-medium leading-relaxed">
-            Em menos de 2 minutos você vai descobrir qual força invisível está moldando seus resultados agora.
-          </p>
+        <div className="flex flex-col items-center gap-1 mb-8">
+          <h1 className="text-3xl md:text-6xl font-black text-white tracking-tighter uppercase">
+            Descubra Quem Está
+          </h1>
+          <h1 className="text-3xl md:text-6xl font-black text-primary tracking-tighter uppercase">
+            Dirigindo Sua Realidade
+          </h1>
         </div>
 
         <Button 
           onClick={() => setStarted(true)}
-          className="h-20 px-12 text-xl font-black rounded-full bg-white text-black hover:bg-white/90 transition-all shadow-[0_0_60px_rgba(168,85,247,0.8)] group mb-20"
+          className="h-16 md:h-20 px-8 md:px-12 text-lg md:text-xl font-black rounded-full bg-white text-black hover:bg-white/90 transition-all shadow-[0_0_60px_rgba(168,85,247,0.8)] group mb-8"
         >
           👉 FAZER TESTE GRATUITO
         </Button>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl mb-12">
-          <div className="p-6 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm flex flex-col items-center gap-1">
-            <span className="text-[10px] tracking-[0.3em] font-black text-white uppercase">RÁPIDO</span>
-            <span className="text-xs text-muted-foreground">2 minutos</span>
+        <div className="px-6 py-3 mb-12 max-w-2xl">
+          <p className="text-white/80 text-sm md:text-base font-medium leading-relaxed">
+            Em menos de 2 minutos você vai descobrir qual força invisível está moldando seus resultados agora.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-3 gap-2 md:gap-4 w-full max-w-4xl mb-12">
+          <div className="p-3 md:p-6 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm flex flex-col items-center gap-1">
+            <span className="text-[8px] md:text-[10px] tracking-[0.2em] font-black text-white uppercase">RÁPIDO</span>
+            <span className="text-[10px] md:text-xs text-muted-foreground">2 min</span>
           </div>
-          <div className="p-6 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm flex flex-col items-center gap-1">
-            <span className="text-[10px] tracking-[0.3em] font-black text-white uppercase">PRECISO</span>
-            <span className="text-xs text-muted-foreground">Padrões Mentais</span>
+          <div className="p-3 md:p-6 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm flex flex-col items-center gap-1">
+            <span className="text-[8px] md:text-[10px] tracking-[0.2em] font-black text-white uppercase">PRECISO</span>
+            <span className="text-[10px] md:text-xs text-muted-foreground">Padrões</span>
           </div>
-          <div className="p-6 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm flex flex-col items-center gap-1">
-            <span className="text-[10px] tracking-[0.3em] font-black text-white uppercase">GRATUITO</span>
-            <span className="text-xs text-muted-foreground">Acesso Nível 1</span>
+          <div className="p-3 md:p-6 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm flex flex-col items-center gap-1">
+            <span className="text-[8px] md:text-[10px] tracking-[0.2em] font-black text-white uppercase">GRATUITO</span>
+            <span className="text-[10px] md:text-xs text-muted-foreground">Nível 1</span>
           </div>
         </div>
 
@@ -290,17 +285,17 @@ const QuizPage = () => {
     <div className="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden">
       <div className="nebula-bg" />
       
-      <div className="absolute top-10 px-4 py-1 border border-primary/50 rounded-full bg-primary/10 text-[10px] tracking-[0.2em] font-bold text-primary flex items-center gap-2 uppercase z-20">
+      <div className="absolute top-6 md:top-10 px-4 py-1 border border-primary/50 rounded-full bg-primary/10 text-[10px] tracking-[0.2em] font-bold text-primary flex items-center gap-2 uppercase z-20">
         <Sparkles size={12} /> Nível 1: A Descoberta
       </div>
 
       <Card className="w-full max-w-md glass-card relative z-10 animate-in fade-in zoom-in duration-500">
-        <CardHeader className="text-center pt-12">
+        <CardHeader className="text-center pt-10 md:pt-12">
           <div className="flex justify-between items-center mb-4 text-[10px] tracking-widest font-bold text-muted-foreground uppercase">
             <span>Pergunta {currentQuestionIndex + 1} de {quizQuestions.length}</span>
             <span>{Math.round(((currentQuestionIndex + 1) / quizQuestions.length) * 100)}%</span>
           </div>
-          <div className="w-full bg-white/5 h-1 rounded-full mb-8 overflow-hidden">
+          <div className="w-full bg-white/5 h-1 rounded-full mb-6 md:mb-8 overflow-hidden">
             <div 
               className="bg-gradient-to-r from-primary to-secondary h-full transition-all duration-500 shadow-[0_0_10px_rgba(168,85,247,0.8)]" 
               style={{ width: `${((currentQuestionIndex + 1) / quizQuestions.length) * 100}%` }}
@@ -308,7 +303,7 @@ const QuizPage = () => {
           </div>
         </CardHeader>
         <CardContent>
-          <Label className="mb-6 block text-xl font-bold text-white leading-snug">
+          <Label className="mb-6 block text-lg md:text-xl font-bold text-white leading-snug">
             {currentQuestion.question}
           </Label>
           
@@ -318,7 +313,7 @@ const QuizPage = () => {
               <img 
                 src={currentImageSrc} 
                 alt="Visual" 
-                className="w-full h-56 object-cover rounded-2xl border border-white/10 relative z-10" 
+                className="w-full h-48 md:h-56 object-cover rounded-2xl border border-white/10 relative z-10" 
               />
             </div>
           )}
@@ -346,12 +341,12 @@ const QuizPage = () => {
                   />
                   <Label 
                     htmlFor={`${currentQuestion.id}-${index}`}
-                    className="flex items-center p-4 rounded-xl border border-white/10 bg-white/5 cursor-pointer transition-all peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10 hover:bg-white/10"
+                    className="flex items-center p-3 md:p-4 rounded-xl border border-white/10 bg-white/5 cursor-pointer transition-all peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10 hover:bg-white/10"
                   >
                     <div className="w-4 h-4 rounded-full border border-white/30 mr-3 flex items-center justify-center peer-data-[state=checked]:border-primary">
                       <div className="w-2 h-2 rounded-full bg-primary scale-0 transition-transform peer-data-[state=checked]:scale-100"></div>
                     </div>
-                    <span className="text-white font-medium">{option.text}</span>
+                    <span className="text-white text-sm md:text-base font-medium">{option.text}</span>
                   </Label>
                 </div>
               ))}
@@ -375,7 +370,7 @@ const QuizPage = () => {
         </CardFooter>
       </Card>
 
-      <footer className="mt-12 py-8 text-muted-foreground/40 text-[10px] tracking-[0.5em] font-bold uppercase z-20">
+      <footer className="mt-8 md:mt-12 py-8 text-muted-foreground/40 text-[10px] tracking-[0.5em] font-bold uppercase z-20">
         Tô no Cosmos
       </footer>
     </div>
