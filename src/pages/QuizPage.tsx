@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card"
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { showSuccess } from "@/utils/toast";
-import { Sparkles } from "lucide-react";
+import { Sparkles, ShieldCheck, Zap, Brain, Star, ArrowRight } from "lucide-react";
 
 interface Question {
   id: string;
@@ -153,21 +153,6 @@ const quizQuestions: Question[] = [
   },
 ];
 
-const questionImages: { [key: number]: string } = {
-  2: "/images/Image_fx.png",
-  3: "/images/2.png",
-  4: "/images/3.png",
-  5: "/images/4.png",
-  6: "/images/5.png",
-  7: "/images/7.png",
-  8: "/images/9.png",
-  9: "/images/8.png",
-  10: "/images/11.png",
-  11: "/images/10.png",
-  12: "/images/Image_fx (2).png",
-  13: "/images/pensamento.png",
-};
-
 const QuizPage = () => {
   const [started, setStarted] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -176,7 +161,6 @@ const QuizPage = () => {
   const navigate = useNavigate();
 
   const currentQuestion = quizQuestions[currentQuestionIndex];
-  const currentImageSrc = questionImages[currentQuestionIndex];
 
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (currentQuestion.id === "name") setUserName(e.target.value);
@@ -217,47 +201,87 @@ const QuizPage = () => {
 
   if (!started) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
+      <div className="min-h-screen flex flex-col items-center bg-background text-white overflow-x-hidden">
         <div className="nebula-bg" />
         
-        <div className="absolute top-10 px-4 py-1 border border-primary/50 rounded-full bg-primary/10 text-[10px] tracking-[0.2em] font-bold text-primary flex items-center gap-2 uppercase">
-          <Sparkles size={12} /> Nível 1: A Descoberta
+        {/* Hero Section */}
+        <div className="w-full max-w-5xl px-6 pt-20 pb-32 flex flex-col items-center text-center">
+          <div className="relative mb-12">
+            <div className="absolute inset-0 bg-primary/30 blur-[100px] rounded-full animate-pulse"></div>
+            <div className="absolute inset-0 bg-secondary/20 blur-[120px] rounded-full animate-pulse delay-700"></div>
+            <img 
+              src="/images/cerebro-quantico.png" 
+              alt="Cérebro Quântico" 
+              className="w-72 h-72 md:w-96 md:h-96 object-cover rounded-full border-2 border-white/10 relative z-10 shadow-[0_0_60px_rgba(168,85,247,0.3)]"
+            />
+          </div>
+
+          <h1 className="text-4xl md:text-7xl font-black mb-6 leading-tight tracking-tighter">
+            A Terapia Cósmica <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary">
+              não é motivação.
+            </span>
+          </h1>
+
+          <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mb-12 font-medium">
+            É reprogramação interna guiada para clareza e destrave emocional.
+          </p>
+
+          {/* Badges */}
+          <div className="flex flex-wrap justify-center gap-4 mb-16">
+            {[
+              { icon: <ShieldCheck size={16} />, text: "CLAREZA IMEDIATA" },
+              { icon: <Zap size={16} />, text: "DESTRAVE EMOCIONAL" },
+              { icon: <Star size={16} />, text: "REALINHAMENTO" }
+            ].map((badge, i) => (
+              <div key={i} className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold tracking-widest uppercase">
+                <span className="text-primary">{badge.icon}</span>
+                {badge.text}
+              </div>
+            ))}
+          </div>
+
+          <Button 
+            onClick={() => setStarted(true)}
+            className="h-20 px-12 text-xl md:text-2xl font-black rounded-full bg-gradient-to-r from-primary to-secondary text-white hover:scale-105 transition-all glow-lilac group"
+          >
+            QUERO IR PARA O PRÓXIMO NÍVEL <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform" />
+          </Button>
         </div>
-        
-        <div className="relative mb-12 mt-20">
-          <div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full animate-pulse"></div>
-          <div className="absolute inset-0 bg-secondary/10 blur-[100px] rounded-full animate-pulse delay-700"></div>
-          <img 
-            src="/images/Image_fx.png" 
-            alt="Consciência" 
-            className="w-64 h-64 object-cover rounded-full border-2 border-primary/30 relative z-10 shadow-[0_0_50px_rgba(168,85,247,0.4)]"
-          />
-        </div>
 
-        <h1 className="text-4xl md:text-6xl font-black text-white mb-4 leading-tight max-w-3xl">
-          Descubra Quem Está <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary">
-            Dirigindo Sua Realidade
-          </span>
-        </h1>
+        {/* Section: Por que afirmações não funcionam */}
+        <div className="w-full max-w-6xl px-6 py-24 bg-white/[0.02] border-y border-white/5">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-black mb-6">Por que afirmações não <br /> funcionam para muita gente?</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+              Você repete que é próspero, mas sua conta continua igual. Você diz que é confiante, mas treme por dentro.
+            </p>
+          </div>
 
-        <p className="text-muted-foreground text-lg mb-12 max-w-xl">
-          Em menos de 2 minutos você vai descobrir qual força invisível está moldando seus resultados agora.
-        </p>
+          <div className="grid md:grid-cols-2 gap-8">
+            <Card className="glass-card border-white/5 p-8">
+              <div className="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center text-secondary mb-6">
+                <Brain size={24} />
+              </div>
+              <h3 className="text-xl font-bold mb-4">A Mente Consciente (5%)</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                É onde você toma decisões lógicas e faz planos. É a ponta do iceberg, fraca demais para vencer hábitos de décadas.
+              </p>
+            </Card>
 
-        <Button 
-          onClick={() => setStarted(true)}
-          className="h-16 px-10 text-xl font-bold rounded-full bg-white text-black hover:bg-white/90 transition-all glow-lilac group"
-        >
-          👉 FAZER TESTE GRATUITO
-        </Button>
-
-        <div className="grid grid-cols-3 gap-4 mt-16 w-full max-w-md">
-          {["RÁPIDO", "PRECISO", "GRATUITO"].map((item) => (
-            <div key={item} className="py-2 border border-white/10 rounded-lg bg-white/5 text-[10px] tracking-widest font-bold text-muted-foreground">
-              {item}
-            </div>
-          ))}
+            <Card className="glass-card border-primary/20 p-8 relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-4">
+                <Sparkles className="text-primary opacity-50" size={24} />
+              </div>
+              <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary mb-6">
+                <Zap size={24} />
+              </div>
+              <h3 className="text-xl font-bold mb-4">O Subconsciente (95%)</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Onde residem as emoções gravadas e os programas herdados. É o piloto automático que realmente dirige sua vida.
+              </p>
+            </Card>
+          </div>
         </div>
       </div>
     );
@@ -285,17 +309,6 @@ const QuizPage = () => {
             {currentQuestion.question}
           </Label>
           
-          {currentImageSrc && (
-            <div className="relative mb-6 group">
-              <div className="absolute inset-0 bg-primary/10 blur-xl group-hover:bg-secondary/20 transition-all"></div>
-              <img 
-                src={currentImageSrc} 
-                alt="Visual" 
-                className="w-full h-56 object-cover rounded-2xl border border-white/10 relative z-10" 
-              />
-            </div>
-          )}
-
           {currentQuestion.type === "text" ? (
             <Input
               placeholder="Seu nome"
