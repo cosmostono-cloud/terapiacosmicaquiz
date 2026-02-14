@@ -39,8 +39,8 @@ const LoadingPage = () => {
         </div>
 
         <h1 className="text-3xl font-black text-white tracking-tighter">
-          Analisando sua <br />
-          <span className="text-primary">Assinatura Energética...</span>
+          Analisando seus <br />
+          <span className="text-primary">Padrões Mentais...</span>
         </h1>
         
         <p className="text-muted-foreground text-sm tracking-widest uppercase font-bold opacity-50">
