@@ -16,7 +16,8 @@ const LoadingPage = () => {
     }
 
     const timer = setTimeout(() => {
-      navigate("/results", { state: { userName, score }, replace: true });
+      // Agora navega para /analysis em vez de /results
+      navigate("/analysis", { state: { userName, score }, replace: true });
     }, 3500);
 
     return () => clearTimeout(timer);
