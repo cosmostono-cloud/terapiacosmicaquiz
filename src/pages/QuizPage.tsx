@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card"
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { showSuccess } from "@/utils/toast";
-import { Sparkles, ShieldCheck, Zap, Brain, Star, ArrowRight } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 interface Question {
   id: string;
@@ -201,86 +201,66 @@ const QuizPage = () => {
 
   if (!started) {
     return (
-      <div className="min-h-screen flex flex-col items-center bg-background text-white overflow-x-hidden">
+      <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center relative overflow-hidden bg-background">
         <div className="nebula-bg" />
         
-        {/* Hero Section */}
-        <div className="w-full max-w-5xl px-6 pt-20 pb-32 flex flex-col items-center text-center">
-          <div className="relative mb-12">
-            <div className="absolute inset-0 bg-primary/30 blur-[100px] rounded-full animate-pulse"></div>
-            <div className="absolute inset-0 bg-secondary/20 blur-[120px] rounded-full animate-pulse delay-700"></div>
-            <img 
-              src="/images/cerebro-quantico.png" 
-              alt="Cérebro Quântico" 
-              className="w-72 h-72 md:w-96 md:h-96 object-cover rounded-full border-2 border-white/10 relative z-10 shadow-[0_0_60px_rgba(168,85,247,0.3)]"
-            />
-          </div>
-
-          <h1 className="text-4xl md:text-7xl font-black mb-6 leading-tight tracking-tighter">
-            A Terapia Cósmica <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary">
-              não é motivação.
-            </span>
-          </h1>
-
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mb-12 font-medium">
-            É reprogramação interna guiada para clareza e destrave emocional.
-          </p>
-
-          {/* Badges */}
-          <div className="flex flex-wrap justify-center gap-4 mb-16">
-            {[
-              { icon: <ShieldCheck size={16} />, text: "CLAREZA IMEDIATA" },
-              { icon: <Zap size={16} />, text: "DESTRAVE EMOCIONAL" },
-              { icon: <Star size={16} />, text: "REALINHAMENTO" }
-            ].map((badge, i) => (
-              <div key={i} className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold tracking-widest uppercase">
-                <span className="text-primary">{badge.icon}</span>
-                {badge.text}
-              </div>
-            ))}
-          </div>
-
-          <Button 
-            onClick={() => setStarted(true)}
-            className="h-20 px-12 text-xl md:text-2xl font-black rounded-full bg-gradient-to-r from-primary to-secondary text-white hover:scale-105 transition-all glow-lilac group"
-          >
-            QUERO IR PARA O PRÓXIMO NÍVEL <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform" />
-          </Button>
+        {/* Badge Superior */}
+        <div className="mb-8 px-6 py-1.5 border border-white/20 rounded-full bg-black/40 text-[10px] tracking-[0.3em] font-bold text-white flex items-center gap-2 uppercase">
+          <Sparkles size={12} className="text-primary" /> NÍVEL 1: A DESCOBERTA
+        </div>
+        
+        {/* Imagem Central */}
+        <div className="relative mb-12">
+          <div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full animate-pulse"></div>
+          <img 
+            src="/images/cerebro-quantico.png" 
+            alt="Cérebro Quântico" 
+            className="w-64 h-64 md:w-80 md:h-80 object-cover rounded-full border-2 border-primary/30 relative z-10 shadow-[0_0_50px_rgba(168,85,247,0.3)]"
+          />
         </div>
 
-        {/* Section: Por que afirmações não funcionam */}
-        <div className="w-full max-w-6xl px-6 py-24 bg-white/[0.02] border-y border-white/5">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-black mb-6">Por que afirmações não <br /> funcionam para muita gente?</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Você repete que é próspero, mas sua conta continua igual. Você diz que é confiante, mas treme por dentro.
-            </p>
+        {/* Headline com Blocos */}
+        <div className="flex flex-col items-center gap-1 mb-6">
+          <div className="bg-[#1A0B2E] px-6 py-2">
+            <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase">
+              Descubra Quem Está
+            </h1>
           </div>
+          <div className="bg-[#1A0B2E] px-6 py-2">
+            <h1 className="text-4xl md:text-6xl font-black text-primary tracking-tighter uppercase">
+              Dirigindo Sua Realidade
+            </h1>
+          </div>
+        </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card className="glass-card border-white/5 p-8">
-              <div className="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center text-secondary mb-6">
-                <Brain size={24} />
-              </div>
-              <h3 className="text-xl font-bold mb-4">A Mente Consciente (5%)</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                É onde você toma decisões lógicas e faz planos. É a ponta do iceberg, fraca demais para vencer hábitos de décadas.
-              </p>
-            </Card>
+        {/* Sub-headline com Bloco Transparente */}
+        <div className="bg-[#1A0B2E]/60 px-6 py-3 mb-12 max-w-2xl">
+          <p className="text-white text-sm md:text-base font-medium leading-relaxed">
+            Em menos de 2 minutos você vai descobrir qual força invisível está moldando seus resultados agora.
+          </p>
+        </div>
 
-            <Card className="glass-card border-primary/20 p-8 relative overflow-hidden">
-              <div className="absolute top-0 right-0 p-4">
-                <Sparkles className="text-primary opacity-50" size={24} />
-              </div>
-              <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary mb-6">
-                <Zap size={24} />
-              </div>
-              <h3 className="text-xl font-bold mb-4">O Subconsciente (95%)</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Onde residem as emoções gravadas e os programas herdados. É o piloto automático que realmente dirige sua vida.
-              </p>
-            </Card>
+        {/* Botão CTA Branco com Brilho */}
+        <Button 
+          onClick={() => setStarted(true)}
+          className="h-20 px-12 text-xl font-black rounded-full bg-white text-black hover:bg-white/90 transition-all shadow-[0_0_60px_rgba(168,85,247,0.8)] group mb-20"
+        >
+          👉 FAZER TESTE GRATUITO
+        </Button>
+
+        {/* Cartões Informativos Inferiores */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl">
+          <div className="p-6 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm flex flex-col items-center gap-1">
+            <span className="text-[10px] tracking-[0.3em] font-black text-white uppercase">RÁPIDO</span>
+            <span className="text-xs text-muted-foreground">2 minutos</span>
+          </div>
+          <div className="p-6 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm flex flex-col items-center gap-1">
+            <span className="text-[10px] tracking-[0.3em] font-black text-white uppercase">PRECISO</span>
+            <span className="text-xs text-muted-foreground">Padrões Mentais</span>
+          </div>
+          <div className="p-6 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm flex flex-col items-center gap-1">
+            <span className="text-[10px] tracking-[0.3em] font-black text-white uppercase">GRATUITO</span>
+            <span className="text-xs text-muted-foreground">Acesso Nível 1</span>
           </div>
         </div>
       </div>
