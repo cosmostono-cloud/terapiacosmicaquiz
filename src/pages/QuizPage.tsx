@@ -154,18 +154,18 @@ const quizQuestions: Question[] = [
 ];
 
 const questionImages: { [key: number]: string } = {
-  2: "/images/Image_fx.png",
-  3: "/images/2.png",
-  4: "/images/3.png",
-  5: "/images/4.png",
-  6: "/images/5.png",
-  7: "/images/7.png",
-  8: "/images/9.png",
-  9: "/images/8.png",
-  10: "/images/11.png",
-  11: "/images/10.png",
-  12: "/images/Image_fx (2).png",
-  13: "/images/pensamento.png",
+  1: "/images/Image_fx.png",
+  2: "/images/2.png",
+  3: "/images/3.png",
+  4: "/images/4.png",
+  5: "/images/5.png",
+  6: "/images/7.png",
+  7: "/images/9.png",
+  8: "/images/8.png",
+  9: "/images/11.png",
+  10: "/images/10.png",
+  11: "/images/Image_fx (2).png",
+  12: "/images/pensamento.png",
 };
 
 const QuizPage = () => {
@@ -185,6 +185,15 @@ const QuizPage = () => {
 
   const handleRadioChange = (value: string) => {
     setAnswers((prev) => ({ ...prev, [currentQuestion.id]: value }));
+    
+    // Avanço automático com um pequeno delay para feedback visual
+    setTimeout(() => {
+      if (currentQuestionIndex < quizQuestions.length - 1) {
+        setCurrentQuestionIndex((prev) => prev + 1);
+      } else {
+        calculateScoreAndRedirect();
+      }
+    }, 400);
   };
 
   const nextQuestion = () => {
@@ -192,11 +201,7 @@ const QuizPage = () => {
       showSuccess("Por favor, insira seu nome.");
       return;
     }
-    if (currentQuestion.type === "radio" && !answers[currentQuestion.id]) {
-      showSuccess("Por favor, selecione uma opção.");
-      return;
-    }
-
+    
     if (currentQuestionIndex < quizQuestions.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
     } else {
@@ -220,12 +225,10 @@ const QuizPage = () => {
       <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center relative overflow-hidden bg-background">
         <div className="nebula-bg" />
         
-        {/* Badge Superior */}
         <div className="mb-8 px-6 py-1.5 border border-white/20 rounded-full bg-black/40 text-[10px] tracking-[0.3em] font-bold text-white flex items-center gap-2 uppercase">
           <Sparkles size={12} className="text-primary" /> NÍVEL 1: A DESCOBERTA
         </div>
         
-        {/* Imagem Central */}
         <div className="relative mb-12">
           <div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full animate-pulse"></div>
           <img 
@@ -235,7 +238,6 @@ const QuizPage = () => {
           />
         </div>
 
-        {/* Headline com Blocos */}
         <div className="flex flex-col items-center gap-1 mb-6">
           <div className="bg-[#1A0B2E] px-6 py-2">
             <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase">
@@ -249,14 +251,12 @@ const QuizPage = () => {
           </div>
         </div>
 
-        {/* Sub-headline com Bloco Transparente */}
         <div className="bg-[#1A0B2E]/60 px-6 py-3 mb-12 max-w-2xl">
           <p className="text-white text-sm md:text-base font-medium leading-relaxed">
             Em menos de 2 minutos você vai descobrir qual força invisível está moldando seus resultados agora.
           </p>
         </div>
 
-        {/* Botão CTA Branco com Brilho */}
         <Button 
           onClick={() => setStarted(true)}
           className="h-20 px-12 text-xl font-black rounded-full bg-white text-black hover:bg-white/90 transition-all shadow-[0_0_60px_rgba(168,85,247,0.8)] group mb-20"
@@ -264,7 +264,6 @@ const QuizPage = () => {
           👉 FAZER TESTE GRATUITO
         </Button>
 
-        {/* Cartões Informativos Inferiores */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl mb-12">
           <div className="p-6 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm flex flex-col items-center gap-1">
             <span className="text-[10px] tracking-[0.3em] font-black text-white uppercase">RÁPIDO</span>
@@ -280,7 +279,6 @@ const QuizPage = () => {
           </div>
         </div>
 
-        {/* Rodapé */}
         <footer className="mt-auto py-8 text-muted-foreground/40 text-[10px] tracking-[0.5em] font-bold uppercase">
           Tô no Cosmos
         </footer>
@@ -298,6 +296,10 @@ const QuizPage = () => {
 
       <Card className="w-full max-w-md glass-card relative z-10 animate-in fade-in zoom-in duration-500">
         <CardHeader className="text-center pt-12">
+          <div className="flex justify-between items-center mb-4 text-[10px] tracking-widest font-bold text-muted-foreground uppercase">
+            <span>Pergunta {currentQuestionIndex + 1} de {quizQuestions.length}</span>
+            <span>{Math.round(((currentQuestionIndex + 1) / quizQuestions.length) * 100)}%</span>
+          </div>
           <div className="w-full bg-white/5 h-1 rounded-full mb-8 overflow-hidden">
             <div 
               className="bg-gradient-to-r from-primary to-secondary h-full transition-all duration-500 shadow-[0_0_10px_rgba(168,85,247,0.8)]" 
@@ -327,6 +329,7 @@ const QuizPage = () => {
               value={answers[currentQuestion.id] || ""}
               onChange={handleTextChange}
               className="h-14 bg-white/5 border-white/10 text-lg focus:border-primary/50 transition-all"
+              onKeyDown={(e) => e.key === 'Enter' && nextQuestion()}
             />
           ) : (
             <RadioGroup
@@ -361,12 +364,14 @@ const QuizPage = () => {
               Anterior
             </Button>
           )}
-          <Button 
-            onClick={nextQuestion} 
-            className="ml-auto h-12 px-8 bg-primary text-white hover:bg-primary/90 glow-lilac font-bold rounded-xl"
-          >
-            {currentQuestionIndex < quizQuestions.length - 1 ? "Próximo" : "Ver Resultado"}
-          </Button>
+          {currentQuestion.type === "text" && (
+            <Button 
+              onClick={nextQuestion} 
+              className="ml-auto h-12 px-8 bg-primary text-white hover:bg-primary/90 glow-lilac font-bold rounded-xl"
+            >
+              Próximo
+            </Button>
+          )}
         </CardFooter>
       </Card>
 
