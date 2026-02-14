@@ -153,6 +153,21 @@ const quizQuestions: Question[] = [
   },
 ];
 
+const questionImages: { [key: number]: string } = {
+  2: "/images/Image_fx.png",
+  3: "/images/2.png",
+  4: "/images/3.png",
+  5: "/images/4.png",
+  6: "/images/5.png",
+  7: "/images/7.png",
+  8: "/images/9.png",
+  9: "/images/8.png",
+  10: "/images/11.png",
+  11: "/images/10.png",
+  12: "/images/Image_fx (2).png",
+  13: "/images/pensamento.png",
+};
+
 const QuizPage = () => {
   const [started, setStarted] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -161,6 +176,7 @@ const QuizPage = () => {
   const navigate = useNavigate();
 
   const currentQuestion = quizQuestions[currentQuestionIndex];
+  const currentImageSrc = questionImages[currentQuestionIndex];
 
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (currentQuestion.id === "name") setUserName(e.target.value);
@@ -249,7 +265,7 @@ const QuizPage = () => {
         </Button>
 
         {/* Cartões Informativos Inferiores */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl mb-12">
           <div className="p-6 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm flex flex-col items-center gap-1">
             <span className="text-[10px] tracking-[0.3em] font-black text-white uppercase">RÁPIDO</span>
             <span className="text-xs text-muted-foreground">2 minutos</span>
@@ -263,6 +279,11 @@ const QuizPage = () => {
             <span className="text-xs text-muted-foreground">Acesso Nível 1</span>
           </div>
         </div>
+
+        {/* Rodapé */}
+        <footer className="mt-auto py-8 text-muted-foreground/40 text-[10px] tracking-[0.5em] font-bold uppercase">
+          Tô no Cosmos
+        </footer>
       </div>
     );
   }
@@ -289,6 +310,17 @@ const QuizPage = () => {
             {currentQuestion.question}
           </Label>
           
+          {currentImageSrc && (
+            <div className="relative mb-6 group">
+              <div className="absolute inset-0 bg-primary/10 blur-xl group-hover:bg-secondary/20 transition-all"></div>
+              <img 
+                src={currentImageSrc} 
+                alt="Visual" 
+                className="w-full h-56 object-cover rounded-2xl border border-white/10 relative z-10" 
+              />
+            </div>
+          )}
+
           {currentQuestion.type === "text" ? (
             <Input
               placeholder="Seu nome"
@@ -337,6 +369,10 @@ const QuizPage = () => {
           </Button>
         </CardFooter>
       </Card>
+
+      <footer className="mt-12 py-8 text-muted-foreground/40 text-[10px] tracking-[0.5em] font-bold uppercase z-20">
+        Tô no Cosmos
+      </footer>
     </div>
   );
 };
