@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card"
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { showSuccess } from "@/utils/toast";
-import { Sparkles, Headphones, Zap, ShieldCheck } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 interface Question {
   id: string;
@@ -217,13 +217,16 @@ const QuizPage = () => {
 
   if (!started) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-background p-6 text-center overflow-hidden relative">
+      <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
+        <div className="nebula-bg" />
+        
         <div className="absolute top-10 px-4 py-1 border border-primary/50 rounded-full bg-primary/10 text-[10px] tracking-[0.2em] font-bold text-primary flex items-center gap-2 uppercase">
           <Sparkles size={12} /> Nível 1: A Descoberta
         </div>
         
         <div className="relative mb-12 mt-20">
-          <div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full"></div>
+          <div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full animate-pulse"></div>
+          <div className="absolute inset-0 bg-secondary/10 blur-[100px] rounded-full animate-pulse delay-700"></div>
           <img 
             src="/images/Image_fx.png" 
             alt="Consciência" 
@@ -233,7 +236,7 @@ const QuizPage = () => {
 
         <h1 className="text-4xl md:text-6xl font-black text-white mb-4 leading-tight max-w-3xl">
           Descubra Quem Está <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-400 to-blue-400">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary">
             Dirigindo Sua Realidade
           </span>
         </h1>
@@ -244,7 +247,7 @@ const QuizPage = () => {
 
         <Button 
           onClick={() => setStarted(true)}
-          className="h-16 px-10 text-xl font-bold rounded-full bg-white text-black hover:bg-white/90 transition-all glow-primary group"
+          className="h-16 px-10 text-xl font-bold rounded-full bg-white text-black hover:bg-white/90 transition-all glow-lilac group"
         >
           👉 FAZER TESTE GRATUITO
         </Button>
@@ -261,7 +264,9 @@ const QuizPage = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden">
+      <div className="nebula-bg" />
+      
       <div className="absolute top-10 px-4 py-1 border border-primary/50 rounded-full bg-primary/10 text-[10px] tracking-[0.2em] font-bold text-primary flex items-center gap-2 uppercase z-20">
         <Sparkles size={12} /> Nível 1: A Descoberta
       </div>
@@ -270,7 +275,7 @@ const QuizPage = () => {
         <CardHeader className="text-center pt-12">
           <div className="w-full bg-white/5 h-1 rounded-full mb-8 overflow-hidden">
             <div 
-              className="bg-primary h-full transition-all duration-500 shadow-[0_0_10px_rgba(168,85,247,0.8)]" 
+              className="bg-gradient-to-r from-primary to-secondary h-full transition-all duration-500 shadow-[0_0_10px_rgba(168,85,247,0.8)]" 
               style={{ width: `${((currentQuestionIndex + 1) / quizQuestions.length) * 100}%` }}
             ></div>
           </div>
@@ -282,7 +287,7 @@ const QuizPage = () => {
           
           {currentImageSrc && (
             <div className="relative mb-6 group">
-              <div className="absolute inset-0 bg-primary/10 blur-xl group-hover:bg-primary/20 transition-all"></div>
+              <div className="absolute inset-0 bg-primary/10 blur-xl group-hover:bg-secondary/20 transition-all"></div>
               <img 
                 src={currentImageSrc} 
                 alt="Visual" 
@@ -333,7 +338,7 @@ const QuizPage = () => {
           )}
           <Button 
             onClick={nextQuestion} 
-            className="ml-auto h-12 px-8 bg-primary text-white hover:bg-primary/90 glow-primary font-bold rounded-xl"
+            className="ml-auto h-12 px-8 bg-primary text-white hover:bg-primary/90 glow-lilac font-bold rounded-xl"
           >
             {currentQuestionIndex < quizQuestions.length - 1 ? "Próximo" : "Ver Resultado"}
           </Button>

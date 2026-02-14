@@ -4,35 +4,26 @@
 
 @layer base {
   :root {
-    --background: 260 30% 2%; /* Preto arroxeado profundo */
+    --background: 260 40% 2%; /* Fundo quase preto com toque de lilás */
     --foreground: 210 40% 98%;
 
-    --card: 260 30% 4%;
+    --card: 260 40% 4%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 260 30% 4%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 270 90% 65%; /* Roxo Neon */
+    --primary: 265 85% 65%; /* Lilás Neon */
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 260 20% 15%;
+    --secondary: 200 90% 50%; /* Azul Ciano Neon */
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 260 20% 15%;
-    --muted-foreground: 260 10% 70%;
-
-    --accent: 270 90% 65%;
+    --accent: 265 85% 65%;
     --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --border: 265 50% 15%;
+    --input: 265 50% 10%;
+    --ring: 265 85% 65%;
 
-    --border: 270 50% 15%;
-    --input: 270 50% 10%;
-    --ring: 270 90% 65%;
-
-    --radius: 1rem;
+    --radius: 1.25rem;
   }
 }
 
@@ -41,17 +32,54 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased overflow-x-hidden;
+    /* Fundo Cósmico com Lilás e Azul */
     background-image: 
-      radial-gradient(circle at 50% -20%, hsl(270 90% 15% / 0.3), transparent),
-      radial-gradient(circle at 0% 100%, hsl(270 90% 10% / 0.2), transparent);
+      radial-gradient(circle at 20% 30%, hsl(265 90% 15% / 0.4), transparent 40%),
+      radial-gradient(circle at 80% 70%, hsl(200 90% 10% / 0.3), transparent 40%),
+      radial-gradient(circle at 50% 50%, hsl(265 90% 5% / 0.5), transparent);
+    background-attachment: fixed;
   }
 }
 
-.glow-primary {
-  box-shadow: 0 0 20px hsl(var(--primary) / 0.4);
+/* Efeito de Nebulosa Animada */
+.nebula-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: radial-gradient(circle at 50% 50%, transparent, hsl(var(--background)));
+  pointer-events: none;
+}
+
+.nebula-bg::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
+  opacity: 0.1;
+  animation: drift 60s linear infinite;
+}
+
+@keyframes drift {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.glow-lilac {
+  box-shadow: 0 0 30px hsl(var(--primary) / 0.3);
+}
+
+.glow-blue {
+  box-shadow: 0 0 30px hsl(var(--secondary) / 0.3);
 }
 
 .glass-card {
-  @apply bg-card/40 backdrop-blur-xl border border-white/10;
+  @apply bg-card/40 backdrop-blur-2xl border border-white/5;
+  box-shadow: inset 0 0 20px hsl(var(--primary) / 0.05);
 }

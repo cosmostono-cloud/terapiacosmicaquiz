@@ -45,11 +45,12 @@ const ResultsPage = () => {
   } else {
     resultTitle = "Frequência: Elevada";
     resultDescription = "Sua consciência está em expansão. Você está pronta para o próximo nível.";
-    resultColor = "text-green-400";
+    resultColor = "text-secondary";
   }
 
   return (
     <div className="min-h-screen bg-background text-white p-6 flex flex-col items-center overflow-x-hidden relative">
+      <div className="nebula-bg" />
       <audio ref={audioRef} src="/audio/respire-fundo.mp3" onEnded={() => setIsPlaying(false)} />
 
       {/* Header */}
@@ -57,7 +58,7 @@ const ResultsPage = () => {
         <div className="px-4 py-1 border border-primary/50 rounded-full bg-primary/10 text-[10px] tracking-[0.2em] font-bold text-primary flex items-center gap-2 uppercase">
           <Sparkles size={12} /> Câmara da Consciência
         </div>
-        <span className="text-[10px] tracking-[0.4em] text-primary/60 font-bold uppercase">Acesso Concedido</span>
+        <span className="text-[10px] tracking-[0.4em] text-secondary/60 font-bold uppercase">Acesso Concedido</span>
       </div>
 
       {/* Headline */}
@@ -71,22 +72,24 @@ const ResultsPage = () => {
       {/* Player Imersivo */}
       <div className="w-full max-w-4xl relative group">
         <div className="absolute inset-0 bg-primary/10 blur-[100px] rounded-full opacity-50"></div>
+        <div className="absolute inset-0 bg-secondary/5 blur-[120px] rounded-full opacity-30 delay-700"></div>
         
         <Card className="glass-card border-white/5 overflow-hidden relative z-10">
           <CardContent className="p-0">
             <div className="p-8 flex flex-col items-center text-center">
-              <div className="flex items-center gap-2 text-[10px] tracking-widest text-primary font-bold uppercase mb-12">
+              <div className="flex items-center gap-2 text-[10px] tracking-widest text-secondary font-bold uppercase mb-12">
                 <Headphones size={14} /> Experiência Imersiva
               </div>
 
               {/* Avatar Central */}
               <div className="relative mb-16">
                 <div className={`absolute inset-0 bg-primary/30 blur-3xl rounded-full ${isPlaying ? 'animate-pulse' : ''}`}></div>
-                <div className={`w-48 h-48 rounded-full border-4 ${isPlaying ? 'border-primary' : 'border-primary/40'} p-1 relative z-10 transition-all duration-500`}>
+                <div className={`absolute inset-0 bg-secondary/20 blur-2xl rounded-full ${isPlaying ? 'animate-ping opacity-20' : 'opacity-0'}`}></div>
+                <div className={`w-48 h-48 rounded-full border-4 ${isPlaying ? 'border-primary' : 'border-white/10'} p-1 relative z-10 transition-all duration-500`}>
                   <img 
                     src="/images/player-avatar.png" 
                     alt="Perfil" 
-                    className={`w-full h-full object-cover rounded-full ${isPlaying ? '' : 'grayscale'} transition-all duration-700`}
+                    className={`w-full h-full object-cover rounded-full ${isPlaying ? '' : 'grayscale opacity-50'} transition-all duration-700`}
                   />
                 </div>
               </div>
@@ -99,7 +102,7 @@ const ResultsPage = () => {
                 </div>
                 <div className="h-[2px] w-full bg-white/10 relative overflow-hidden">
                   {isPlaying && (
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary to-transparent w-1/2 animate-[shimmer_2s_infinite]"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-secondary to-transparent w-1/2 animate-[shimmer_2s_infinite]"></div>
                   )}
                 </div>
               </div>
@@ -107,7 +110,7 @@ const ResultsPage = () => {
               {/* Botão Play/Pause */}
               <div className="flex flex-col items-center gap-6">
                 {!isPlaying && (
-                  <div className="px-4 py-1 bg-primary text-[10px] font-black rounded-full text-white uppercase tracking-tighter animate-bounce">
+                  <div className="px-4 py-1 bg-secondary text-[10px] font-black rounded-full text-white uppercase tracking-tighter animate-bounce">
                     Clique no Play
                   </div>
                 )}
@@ -138,7 +141,7 @@ const ResultsPage = () => {
         <a href="https://terapiacosmica.tonocosmos.com.br/" target="_blank" rel="noopener noreferrer" className="block pt-8">
           <Button 
             size="lg" 
-            className="h-16 px-12 text-xl font-black bg-primary text-white rounded-full glow-primary hover:scale-105 transition-all animate-[pulse-glow_2s_infinite]"
+            className="h-16 px-12 text-xl font-black bg-gradient-to-r from-primary to-secondary text-white rounded-full glow-lilac hover:scale-105 transition-all animate-[pulse-glow_2s_infinite]"
           >
             ATIVAR MINHA CONSCIÊNCIA AGORA
           </Button>
@@ -151,8 +154,8 @@ const ResultsPage = () => {
           100% { transform: translateX(200%); }
         }
         @keyframes pulse-glow {
-          0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); transform: scale(1); }
-          50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.8); transform: scale(1.02); }
+          0%, 100% { box-shadow: 0 0 20px hsl(var(--primary) / 0.4); transform: scale(1); }
+          50% { box-shadow: 0 0 40px hsl(var(--secondary) / 0.6); transform: scale(1.02); }
         }
       `}</style>
     </div>
