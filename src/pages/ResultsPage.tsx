@@ -142,7 +142,7 @@ const ResultsPage = () => {
         <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
           {resultDescription}
         </p>
-        <a href="https://terapiacosmica.tonocosmos.com.br/" target="_blank" rel="noopener noreferrer" className="block pt-4 md:pt-8">
+        <a href="https://mentoria.tonocosmos.com.br/" target="_blank" rel="noopener noreferrer" className="block pt-4 md:pt-8">
           <Button 
             size="lg" 
             className="w-full md:w-auto h-14 md:h-16 px-8 md:px-12 text-base md:text-xl font-black bg-gradient-to-r from-primary to-secondary text-white rounded-full glow-lilac hover:scale-105 transition-all animate-[pulse-glow_2s_infinite]"
