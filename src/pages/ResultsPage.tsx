@@ -117,9 +117,9 @@ const ResultsPage = () => {
                   className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white flex items-center justify-center text-black hover:scale-110 transition-transform shadow-[0_0_40px_rgba(255,255,255,0.3)] group"
                 >
                   {isPlaying ? (
-                    <Pause size={32} md:size={40} fill="currentColor" className="group-hover:scale-110 transition-transform" />
+                    <Pause fill="currentColor" className="w-8 h-8 md:w-10 md:h-10 group-hover:scale-110 transition-transform" />
                   ) : (
-                    <Play size={32} md:size={40} fill="currentColor" className="ml-1 md:ml-2 group-hover:scale-110 transition-transform" />
+                    <Play fill="currentColor" className="w-8 h-8 md:w-10 md:h-10 ml-1 md:ml-2 group-hover:scale-110 transition-transform" />
                   )}
                 </button>
               </div>
